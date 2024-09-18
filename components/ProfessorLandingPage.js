@@ -20,7 +20,7 @@ const ProfessorLandingPage = () => {
     'service_2n6ytvp',  // Replace with your EmailJS Service ID
     'template_sqiaceg', // Replace with your EmailJS Template ID
     templateParams,
-    'AUIQB'      // Replace with your EmailJS User ID
+    'Abp-GUV--L0OBZACO'      // Replace with your EmailJS User ID
   )
   .then((response) => {
     console.log('Email successfully sent!', response.status, response.text);
