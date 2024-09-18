@@ -35,7 +35,7 @@ export default function ExamQualifications() {
                 <h3 className="text-xl font-semibold mb-2">{qual.name}-{qual.subject}</h3>
              
                 <p className="text-gray-600 mb-2">{qual.year}</p>
-                <p className="text-gray-800 font-medium">{qual.score}{qual.rank}</p>
+                <p className="text-gray-800 font-medium">{qual.score}-{qual.rank}</p>
               </div>
             </div>
           ))}
