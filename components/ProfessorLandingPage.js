@@ -8,6 +8,7 @@ import CentralOrb from './CentralOrb';
 import OrbitingIcons from './OrbitingIcons';
 import Navbar3D from './Navbar3D';
 import CoursesSection from './CourseSection';
+import ExamQualifications from './ExamQualifications';
 const ProfessorLandingPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -129,6 +130,8 @@ const toggleMenu = () => {
           </div>
         </div>
       </section>
+      {/*Exam Qualification Section */}
+      <ExamQualifications />
 {/* Experience Section */}
 
 <section id="experience" className="py-16 bg-white">
