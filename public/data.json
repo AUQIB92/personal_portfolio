@@ -1,0 +1,15 @@
+[
+    {
+      "enrollmentNo": "2133",
+      "courseTitle": "Computer Programming",
+      "result": "Minor 1",
+      "marks": "85"
+    },
+    {
+      "enrollmentNo": "2133",
+      "courseTitle": "Java Programming",
+      "result": "Minor 2",
+      "marks": "90"
+    }
+]
+  

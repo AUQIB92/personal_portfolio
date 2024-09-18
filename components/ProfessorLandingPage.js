@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import emailjs from 'emailjs-com';
+import { Menu, X } from 'lucide-react'
 import { FaTwitter, FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
 import { FaGoogleScholar } from 'react-icons/fa6';
+import Blockchain3D from './Blockchain3D';
+import CentralOrb from './CentralOrb';
+import OrbitingIcons from './OrbitingIcons';
+import Navbar3D from './Navbar3D';
+import CoursesSection from './CourseSection';
 const ProfessorLandingPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -44,19 +50,19 @@ const toggleMenu = () => {
 
   return (
     <div className="font-sans">
-     {/* Header Section */}
+
 {/* Header Section */}
-<header className="bg-gray-50 py-6 shadow-lg">
+<header className="bg-gradient-to-r from-blue-50 to-indigo-50 py-6 shadow-lg">
       <div className="container mx-auto px-4 flex flex-wrap items-center justify-between">
         {/* Logo and Title */}
         <div className="flex items-center">
           <img
             src="/Logo.jpeg"
             alt="Professor's Logo"
-            className="w-20 h-20 rounded-full mr-4"
+            className="w-20 h-20 rounded-full mr-4 border-2 border-blue-500 shadow-md"
           />
-          <h1 className="text-2xl md:text-3xl font-bold text-blue-700">
-            Auqib Hamid Lone (Ph.D.)
+          <h1 className="text-2xl md:text-3xl font-bold text-blue-700 tracking-wide">
+            Auqib Hamid Lone <span className="text-lg font-normal">(Ph.D.)</span>
           </h1>
         </div>
 
@@ -64,22 +70,9 @@ const toggleMenu = () => {
         <div className="block lg:hidden">
           <button
             onClick={toggleMenu}
-            className="text-blue-700 hover:bg-blue-600 hover:text-white focus:outline-none px-4 py-2 rounded-md"
+            className="text-blue-700 hover:bg-blue-600 hover:text-white focus:outline-none px-4 py-2 rounded-md transition-colors duration-300"
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16m-7 6h7"
-              />
-            </svg>
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
 
@@ -87,53 +80,26 @@ const toggleMenu = () => {
         <nav
           className={`${
             isOpen ? 'block' : 'hidden'
-          } lg:flex lg:items-center w-full lg:w-auto`}
+          } lg:flex lg:items-center w-full lg:w-auto mt-4 lg:mt-0`}
         >
-          <ul className="flex flex-col lg:flex-row lg:space-x-4 rounded-lg lg:p-0 p-4 bg-blue-50 lg:bg-transparent">
-            <li>
-              <a
-                href="#about"
-                className="text-blue-700 hover:bg-blue-600 hover:text-white text-lg px-4 py-2 rounded-md transition duration-300"
-              >
-                About
-              </a>
-            </li>
-            <li>
-              <a
-                href="#experience"
-                className="text-blue-700 hover:bg-blue-600 hover:text-white text-lg px-4 py-2 rounded-md transition duration-300"
-              >
-                Experience
-              </a>
-            </li>
-            <li>
-              <a
-                href="#courses"
-                className="text-blue-700 hover:bg-blue-600 hover:text-white text-lg px-4 py-2 rounded-md transition duration-300"
-              >
-                Courses
-              </a>
-            </li>
-            <li>
-              <a
-                href="#publications"
-                className="text-blue-700 hover:bg-blue-600 hover:text-white text-lg px-4 py-2 rounded-md transition duration-300"
-              >
-                Publications
-              </a>
-            </li>
-            <li>
-              <a
-                href="#contact"
-                className="text-blue-700 hover:bg-blue-600 hover:text-white text-lg px-4 py-2 rounded-md transition duration-300"
-              >
-                Contact
-              </a>
-            </li>
+          <ul className="flex flex-col lg:flex-row lg:space-x-2 rounded-lg lg:bg-transparent">
+            {['About', 'Experience', 'Courses', 'Publications', 'Contact'].map((item) => (
+              <li key={item} className="my-1 lg:my-0">
+                <a
+                  href={`#${item.toLowerCase()}`}
+                  className="block text-blue-700 hover:bg-blue-600 hover:text-white text-lg px-4 py-2 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-md"
+                >
+                  {item}
+                </a>
+              </li>
+            ))}
           </ul>
         </nav>
       </div>
     </header>
+
+
+
       {/* About Section */}
       
       <section id="about" className="py-10 bg-white">
@@ -165,69 +131,65 @@ const toggleMenu = () => {
       </section>
 {/* Experience Section */}
 
- <section id="experience" className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-8">Experience</h2>
-          <div className="space-y-6">
-            {[
-              { company : 'GCET Kashmir',location:"Ganderbal Kashmir, India", role:"Assitant professor (Computer Science & Engineering)", job_description: "At GCET, I am teaching various core and specialized  undergrad coureses to BTech CSE Students ", date:'March-2024 to ongoing', type:'Full-Time' },
-             { company : 'Parity Financial',location:"London,UK", role:"Research Scientist (Blockchain & cryptography)", job_description: "At Parfin, I was responsible to understand and improve the underlying mechanisms in particular in regards to Cryptography, Blockchain and Security. I conducted research, developed PoCs (proofs of concept) and applied knowledge to assist other team members in implementing solutions to integrate new Blokchain Platforms and timely improve the existing ones", date:'April-2021 to Feb-2024', type:'Full-Time' },
-             { company : ' Bloom Tech',location:"Remote (USA)", role:"Subject Matter Expert", job_description: " I was Subject Matter Expert at Bloom Tech. USA for the Web3 course. In particular, I was SME for Ethereum Tokens (ERC20 and ERC721)", date:'June-2022 to Dec-2022', type:'Part-Time' },
-             { company : 'Colleges and Univerities',location:"Remote", role:"Technical Trainer", job_description: "  I have conducted Training/Teaching sessions for College students on Blockchain Technology. I have developed a curriculum that helps students to understand the ins and outs of the technology", date:'April-2021 to Dec-2023', type:'Part-Time' }
-            
-
-           
-
-            ].map((experience, index) => (
-              <div key={index} className="bg-gray-100 p-6 rounded-lg transition duration-300 hover:shadow-md">
-                <h3 className="text-xl font-bold mb-2">{experience.company}</h3>
-                <p className="text-gray-600 italic mb-2">{experience.location}</p>
-                <p className="text-gray-600   font-bold mb-2">{experience.role}</p>
-                <p className="text-gray-600 mb-2">{experience.job_description}</p>
-                <p className="text-gray-600 mb-2">{experience.type}</p>
-                <p className="text-gray-500  font-bold  mb-4">{experience.date}</p>
-                
-              </div>
-            ))}
-          </div>
+<section id="experience" className="py-16 bg-white">
+  <div className="container mx-auto px-4">
+    <h2 className="text-3xl font-bold mb-8">Experience</h2>
+    <div className="space-y-6">
+      {[
+        { 
+          company: 'GCET Kashmir',
+          location: "Ganderbal Kashmir, India",
+          role: "Assistant professor (Computer Science & Engineering)",
+          job_description: "At GCET, I am teaching various core and specialized undergrad courses to BTech CSE Students",
+          date: 'March-2024 to ongoing',
+          type: 'Full-Time'
+        },
+        {
+          company: 'Parity Financial',
+          location: "London, UK",
+          role: "Research Scientist (Blockchain & cryptography)",
+          job_description: "At Parfin, I was responsible to understand and improve the underlying mechanisms in particular in regards to Cryptography, Blockchain and Security. I conducted research, developed PoCs (Proof of Concepts) and applied knowledge to assist other team members in implementing solutions to integrate new Blockchain Platforms and timely improve the existing ones",
+          date: 'April-2021 to Feb-2024',
+          type: 'Full-Time'
+        },
+        {
+          company: 'Bloom Tech',
+          location: "Remote (USA)",
+          role: "Subject Matter Expert",
+          job_description: "I was Subject Matter Expert at Bloom Tech, USA for the Web3 course. In particular, I was SME for Ethereum Tokens (ERC20 and ERC721)",
+          date: 'June-2022 to Dec-2022',
+          type: 'Part-Time'
+        },
+        {
+          company: 'Colleges and Universities',
+          location: "Remote",
+          role: "Technical Trainer",
+          job_description: "I have conducted Training/Teaching sessions for College students on Blockchain Technology. I have developed a curriculum that helps students to understand the ins and outs of the technology",
+          date: 'April-2021 to Dec-2023',
+          type: 'Part-Time'
+        }
+      ].map((experience, index) => (
+        <div
+          key={index}
+          className="bg-gray-100 p-6 transition duration-300 transform hover:scale-105 rounded-lg hover:shadow-lg hover:bg-gradient-to-r hover:from-gray-100 hover:via-gray-200 hover:to-gray-300 hover:text-gray-900"
+        >
+          <h3 className="text-xl font-bold mb-2">{experience.company}</h3>
+          <p className="text-gray-600 italic mb-2 hover:text-gray-700">{experience.location}</p>
+          <p className="text-gray-600 font-bold mb-2 hover:text-gray-700">{experience.role}</p>
+          <p className="text-gray-600 mb-2 hover:text-gray-700">{experience.job_description}</p>
+          <p className="text-gray-600 mb-2 hover:text-gray-700">{experience.type}</p>
+          <p className="text-gray-500 font-bold mb-4 hover:text-gray-700">{experience.date}</p>
         </div>
-       
-             
-      </section>
-
-
-
+      ))}    </div>
+  </div>
+</section>
 
 
 
 
 
       {/* Courses Section */}
-      <section id="courses" className="py-16 bg-gray-100">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-8">Courses </h2>
-          <h4 className="text-1xl font-bold mb-8">Courses that I am currently teaching or taught in past </h4>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { title: 'Cryptography & Network Security', description: 'Learn the fundamentals of Coryptography and Network Security.', image:"./Crypto_Net-Sec.jpeg" },
-              { title: 'Computer Programming', description: 'Learn the fundamentals of Computer Programming. Explore and implement differnet Programming concepts using C Programming Language.', image: './Computer_Prog.jpg' },
-              { title: 'Java Proramming', description: 'Explore the world of JAVA. Learn  the classic elements of Object oriented programming. ', image:'./Java.jpeg' },
-              { title: 'Introduction to Blockchain', description: 'Learn about the facinating world of Blockchain Tecnology that is shaping the future of payments and beyond.', image: './Block.png' },
-            ].map((course, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden transition duration-300 transform hover:scale-105">
-                <img src={course.image} alt={course.title} className="w-full h-48 object-cover" />
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">{course.title}</h3>
-                  <p className="text-gray-600 mb-4">{course.description}</p>
-                  <button className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300">
-                    Course Contents
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+    <CoursesSection />
 
       {/* Publications Section */}
       <section id="publications" className="py-162 bg-white">
