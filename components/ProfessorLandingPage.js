@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import emailjs from 'emailjs-com';
 import { FaTwitter, FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
 import { FaGoogleScholar } from 'react-icons/fa6';
 const ProfessorLandingPage = () => {
@@ -9,14 +10,32 @@ const ProfessorLandingPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-   console.log('Form submitted:', { name, email, subject, message });
-    console.log('Form submitted:', { name, email, subject, message });
-    // Reset form fields
-    setName('');
-    setEmail('');
-    setSubject('');
-    setMessage('');
-  };
+    const templateParams = {
+      from_name: name,
+      from_email: email,
+      subject: subject,
+      message: message,
+    };
+  emailjs.send(
+    'service_2n6ytvp',  // Replace with your EmailJS Service ID
+    'template_sqiaceg', // Replace with your EmailJS Template ID
+    templateParams,
+    'AUIQB'      // Replace with your EmailJS User ID
+  )
+  .then((response) => {
+    console.log('Email successfully sent!', response.status, response.text);
+  })
+  .catch((err) => {
+    console.error('Error sending email:', err);
+  });
+
+  // Reset form fields
+  setName('');
+  setEmail('');
+  setSubject('');
+  setMessage('');
+};
+
 
   return (
     <div className="font-sans">
@@ -82,8 +101,8 @@ const ProfessorLandingPage = () => {
           <div className="space-y-6">
             {[
               { company : 'GCET Kashmir',location:"Ganderbal Kashmir, India", role:"Assitant professor (Computer Science & Engineering)", job_description: "At GCET, I am teaching various core and specialized  undergrad coureses to BTech CSE Students ", date:'March-2024 to ongoing', type:'Full-Time' },
-             { company : 'Parity Financial',location:"London", role:"Research Scientist (Blockchain & cryptography)", job_description: "At Parfin, I was responsible to understand and improve the underlying mechanisms in particular in regards to Cryptography, Blockchain and Security. I conducted research, developed PoCs (proofs of concept) and applied knowledge to assist other team members in implementing solutions to integrate new Blokchain Platforms and timely improve the existing ones", date:'April-2021 to Feb-2024', type:'Full-Time' },
-             { company : ' Bloom Tech',location:"Remote", role:"Subject Matter Expert", job_description: " I was Subject Matter Expert at Bloom Tech. USA for the Web3 course. In particular, I was SME for Ethereum Tokens (ERC20 and ERC721)", date:'June-2022 to Dec-2022', type:'Part-Time' },
+             { company : 'Parity Financial',location:"London,UK", role:"Research Scientist (Blockchain & cryptography)", job_description: "At Parfin, I was responsible to understand and improve the underlying mechanisms in particular in regards to Cryptography, Blockchain and Security. I conducted research, developed PoCs (proofs of concept) and applied knowledge to assist other team members in implementing solutions to integrate new Blokchain Platforms and timely improve the existing ones", date:'April-2021 to Feb-2024', type:'Full-Time' },
+             { company : ' Bloom Tech',location:"Remote (USA)", role:"Subject Matter Expert", job_description: " I was Subject Matter Expert at Bloom Tech. USA for the Web3 course. In particular, I was SME for Ethereum Tokens (ERC20 and ERC721)", date:'June-2022 to Dec-2022', type:'Part-Time' },
              { company : 'Colleges and Univerities',location:"Remote", role:"Technical Trainer", job_description: "  I have conducted Training/Teaching sessions for College students on Blockchain Technology. I have developed a curriculum that helps students to understand the ins and outs of the technology", date:'April-2021 to Dec-2023', type:'Part-Time' }
             
 
@@ -179,6 +198,9 @@ const ProfessorLandingPage = () => {
               </div>   
              
       </section>
+
+
+
 
       {/* Contact Section */}
       <section id="contact" className="py-16 bg-gray-100">
