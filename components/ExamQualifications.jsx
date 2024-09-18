@@ -4,8 +4,8 @@ import { Award } from 'lucide-react'
 export default function ExamQualifications() {
   const qualifications = [
     { name: "GATE",subject:"CS&IT", year: "2018", score: "98.5 percentile", color: "from-purple-500 to-indigo-500" },
-    { name: "NET-JRF", subject:"Computer Applications", year: "2018", score: "99.9 percentile",rankscore: "AIR 31", color: "from-green-500 to-teal-500" },
-    { name: "JK-SET", year: "2017", score: "Qualified", color: "from-red-500 to-pink-500" },
+    { name: "NET-JRF", subject:"Computer Applications", year: "2018", score: "99.9 percentile",rank: "AIR 31", color: "from-green-500 to-teal-500" },
+    { name: "JK-SET", subject:"Computer Applications", year: "2017", score: "Qualified", color: "from-red-500 to-pink-500" },
 
   ]
 
@@ -35,7 +35,7 @@ export default function ExamQualifications() {
                 <h3 className="text-xl font-semibold mb-2">{qual.name}-{qual.subject}</h3>
              
                 <p className="text-gray-600 mb-2">{qual.year}</p>
-                <p className="text-gray-800 font-medium">{qual.score}</p>
+                <p className="text-gray-800 font-medium">{qual.score}{qual.rank}</p>
               </div>
             </div>
           ))}
