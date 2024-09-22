@@ -14,7 +14,7 @@ export default function ExamQualifications() {
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl mb-4">
-            Competitive Exam Qualifications
+            Competitive Exams Qualified
           </h2>
           <p className="max-w-[900px] mx-auto text-gray-600 md:text-xl">
             Showcasing my academic excellence through national and state-level competitive examinations.
