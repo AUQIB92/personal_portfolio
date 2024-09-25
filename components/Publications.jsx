@@ -30,6 +30,17 @@ const publications = [
     link: 'https://www.sciencedirect.com/science/article/abs/pii/S1574013720304603'
   },
   {
+
+   title:' Forgery protection of academic certificates through integrity preservation at scale using ethereum smart contract',
+    authors: 'AH Lone, R Naaz',
+    journal : 'Scalable Computing: Practice and Experience',
+    impactFactor: ' 1.1',
+    pages: '673-688',
+    year: '2020',
+    link:'https://www.scpe.org/index.php/scpe/article/view/1806'
+  },
+
+  {
     title: 'Demystifying cryptography behind blockchains and a vision for post-quantum blockchains',
     authors: 'AH Lone, R Naaz',
     journal: 'IEEE International Conference for Innovation in Technology (INOCON)',
@@ -52,7 +63,7 @@ export default function Publications() {
               <p className="text-indigo-400 mb-4">Pages: {publication.pages}</p>
               <div className="flex items-center justify-between">
                 {publication.impactFactor && (
-                  <Badge variant="secondary" className="bg-amber-100 text-amber-800 hover:bg-amber-200 font-semibold">
+                  <Badge variant="secondary" className="bg-amber-100 text-green-950 hover:bg-amber-200 font-semibold">
                     IF: {publication.impactFactor}
                   </Badge>
                 )}
