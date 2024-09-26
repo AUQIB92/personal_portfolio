@@ -1,11 +1,12 @@
-'use client'
-import React, { useState } from 'react'
-import { Menu, X } from 'lucide-react'
+"use client";
+
+import React, { useState } from "react";
+import { Menu, X } from "lucide-react";
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => setIsOpen(!isOpen)
+  const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
     <header className="bg-gradient-to-r from-blue-50 to-indigo-50 py-6 shadow-lg">
@@ -17,9 +18,17 @@ export default function Header() {
             alt="Professor's Logo"
             className="w-20 h-20 rounded-full mr-4 border-2 border-blue-500 shadow-md"
           />
-          <h1 className="text-2xl md:text-3xl font-bold text-blue-700 tracking-wide">
-            Auqib Hamid Lone <span className="text-lg font-normal">(Ph.D.)</span>
-          </h1>
+          <div>
+            <h1 className="text-2xl md:text-3xl font-bold text-blue-700 tracking-wide">
+              Auqib Hamid Lone{" "}
+              <span className="text-lg font-normal">(Ph.D.)</span>
+            </h1>
+            <p className="text-sm md:text-base text-gray-600 mt-2 italic tracking-wide">
+              <span className="font-bold">I Code with Purpose</span>,{" "}
+              <span className="font-bold">Read for Growth</span>,{" "}
+              <span className="font-bold">Teach for Impact</span>
+            </p>
+          </div>
         </div>
 
         {/* Hamburger Icon */}
@@ -36,23 +45,25 @@ export default function Header() {
         {/* Navigation Links */}
         <nav
           className={`${
-            isOpen ? 'block' : 'hidden'
+            isOpen ? "block" : "hidden"
           } lg:flex lg:items-center w-full lg:w-auto mt-4 lg:mt-0`}
         >
           <ul className="flex flex-col lg:flex-row lg:space-x-2 rounded-lg lg:bg-transparent">
-            {['About', 'Experience', 'Courses', 'Publications', 'Contact'].map((item) => (
-              <li key={item} className="my-1 lg:my-0">
-                <a
-                  href={`#${item.toLowerCase()}`}
-                  className="block text-blue-700 hover:bg-blue-600 hover:text-white text-lg px-4 py-2 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-md"
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
+            {["About", "Experience", "Courses", "Publications", "Contact"].map(
+              (item) => (
+                <li key={item} className="my-1 lg:my-0">
+                  <a
+                    href={`#${item.toLowerCase()}`}
+                    className="block text-blue-700 hover:bg-blue-600 hover:text-white text-lg px-4 py-2 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-md"
+                  >
+                    {item}
+                  </a>
+                </li>
+              )
+            )}
           </ul>
         </nav>
       </div>
     </header>
-  )
+  );
 }
