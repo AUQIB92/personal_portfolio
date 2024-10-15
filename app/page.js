@@ -1,6 +1,7 @@
 "use client";
 import Head from "next/head";
 import ProfessorLandingPage from "../components/ProfessorLandingPage";
+import ArwaaLabs from "../components/ArwaaLabs";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ProfessorLandingPage />
+      
     </div>
   );
 }

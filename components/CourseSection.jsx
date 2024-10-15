@@ -1,13 +1,17 @@
 'use client';
 
 import React, { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card"
+import { Input } from "../components/ui/input"
+import { Button } from "../components/ui/button"
+import { X } from "lucide-react"
 
 const CoursesSection = () => {
   const [search, setSearch] = useState('');
   const [filteredResults, setFilteredResults] = useState([]);
-  const [isSearching, setIsSearching] = useState(false);
   const [currentCourse, setCurrentCourse] = useState(null);
   const [error, setError] = useState('');
+  const [showResultCard, setShowResultCard] = useState(false);
 
   // Static course data
   const courses = [
@@ -52,20 +56,16 @@ const CoursesSection = () => {
     }
   };
 
-
   return (
-    <section id="courses" className="py-16 bg-gray-100">
+    <section id="courses" className="py-4 bg-teal-50">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-8">Courses</h2>
-        <h4 className="text-xl font-bold mb-8">Courses that I am currently teaching or taught in the past</h4>
+        <h2 className="text-3xl font-bold mb-8 text-teal-800">Courses</h2>
+        <h4 className="text-xl font-bold mb-8 text-teal-700">Courses that I am currently teaching or taught in the past</h4>
         {error && <p className="text-red-500">{error}</p>}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {courses.map((course, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-lg shadow-md overflow-hidden transition duration-300 transform hover:scale-105 relative"
-            >
-                 <div className={`absolute top-4 right-4 px-2 py-1 rounded-full text-xs font-semibold ${course.ongoing ? 'bg-green-500 text-white' : 'bg-gray-300 text-gray-700'}`}>
+            <Card key={index} className="overflow-hidden transition duration-300 transform hover:scale-105 hover:shadow-lg">
+              <div className={`absolute top-4 right-4 px-2 py-1 rounded-full text-xs font-semibold ${course.ongoing ? 'bg-teal-500 text-white' : 'bg-gray-300 text-gray-700'}`}>
                 {course.ongoing ? 'Ongoing' : 'Completed'}
               </div>
               <img
@@ -73,67 +73,69 @@ const CoursesSection = () => {
                 alt={course.title}
                 className="w-full h-48 object-cover"
               />
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2">{course.title}</h3>
+              <CardContent className="p-6">
+                <h3 className="text-xl font-semibold mb-2 text-teal-700">{course.title}</h3>
                 <p className="text-gray-600 mb-4">{course.description}</p>
                 {course.ongoing && (
-                  <div>
-                    <button
-                      className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
-                      onClick={() => {
-                        setCurrentCourse(course.title);
-                        setIsSearching(currentCourse !== course.title || !isSearching);
-                      }}
-                    >
-                      View Results
-                    </button>
-                    {isSearching && currentCourse === course.title && (
-                      <div className="absolute inset-x-0 bottom-0 bg-gray-200 rounded p-4 mt-4">
-                        <form onSubmit={handleSearch}>
-                          <label htmlFor="enroll-no" className="block text-gray-700 mb-2">
-                            Enter ID: (ID =Enrollment Number+DOB) : For an enrollment number 123 and DOB 15-03-1992, the generated ID would be: 2133
-
-
-                          </label>
-                          <input
-                            id="enroll-no"
-                            type="text"
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            className="w-full p-2 border border-gray-300 rounded mb-4"
-                            placeholder="Enrollment Number"
-                            required
-                          />
-                          <button
-                            type="submit"
-                            className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
-                          >
-                            Search
-                          </button>
-                        </form>
-                        {filteredResults.length > 0 ? (
-                          <div className="mt-4">
-                            <h4 className="text-lg font-bold mb-2">Search Results</h4>
-                            <ul>
-                              {filteredResults.map((result, i) => (
-                                <li key={i} className="text-gray-700 mb-1">
-                                  {result.courseTitle}: {result.marks} (Minor: {result.minor})
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ) : (
-                          <p className="text-gray-600">No results found</p>
-                        )}
-                      </div>
-                    )}
-                  </div>
+                  <Button
+                    className="bg-teal-600 hover:bg-teal-700 text-white"
+                    onClick={() => {
+                      setCurrentCourse(course.title);
+                      setShowResultCard(true);
+                    }}
+                  >
+                    View Results
+                  </Button>
                 )}
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>
+      {showResultCard && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+          <Card className="w-full max-w-md">
+            <CardHeader>
+              <CardTitle className="flex justify-between items-center">
+                <span>Search Results for {currentCourse}</span>
+                <Button variant="ghost" onClick={() => setShowResultCard(false)}>
+                  <X className="h-6 w-6" />
+                </Button>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSearch} className="mb-4">
+                <label htmlFor="enroll-no" className="block text-teal-700 mb-2">
+                  Enter ID: (ID = Enrollment Number + DOB) : For an enrollment number 123 and DOB 15-03-1992, the generated ID would be: 2133
+                </label>
+                <Input
+                  id="enroll-no"
+                  type="text"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="w-full p-2 border border-teal-300 rounded mb-4"
+                  placeholder="Enrollment Number"
+                  required
+                />
+                <Button type="submit" className="bg-teal-600 hover:bg-teal-700 text-white w-full">
+                  Search
+                </Button>
+              </form>
+              {filteredResults.length > 0 ? (
+                <ul>
+                  {filteredResults.map((result, i) => (
+                    <li key={i} className="text-teal-700 mb-1">
+                      {result.courseTitle}: {result.marks} (Minor: {result.minor})
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-teal-600">No results found. Please try searching.</p>
+              )}
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </section>
   );
 };

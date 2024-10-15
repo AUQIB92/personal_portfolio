@@ -9,17 +9,17 @@ export default function Header() {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <header className="bg-gradient-to-r from-blue-50 to-indigo-50 py-6 shadow-lg">
+    <header className="bg-gradient-to-r from-teal-50 to-emerald-50 py-6 shadow-lg">
       <div className="container mx-auto px-4 flex flex-wrap items-center justify-between">
         {/* Logo and Title */}
         <div className="flex items-center">
           <img
             src="./Logo.jpeg"
             alt="Professor's Logo"
-            className="w-20 h-20 rounded-full mr-4 border-2 border-blue-500 shadow-md"
+            className="w-20 h-20 rounded-full mr-4 border-2 border-teal-500 shadow-md"
           />
           <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-blue-700 tracking-wide">
+            <h1 className="text-2xl md:text-3xl font-bold text-teal-700 tracking-wide">
               Auqib Hamid Lone{" "}
               <span className="text-lg font-normal">(Ph.D.)</span>
             </h1>
@@ -35,7 +35,7 @@ export default function Header() {
         <div className="block lg:hidden">
           <button
             onClick={toggleMenu}
-            className="text-blue-700 hover:bg-blue-600 hover:text-white focus:outline-none px-4 py-2 rounded-md transition-colors duration-300"
+            className="text-teal-700 hover:bg-teal-600 hover:text-white focus:outline-none px-4 py-2 rounded-md transition-colors duration-300"
             aria-label="Toggle menu"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -54,13 +54,22 @@ export default function Header() {
                 <li key={item} className="my-1 lg:my-0">
                   <a
                     href={`#${item.toLowerCase()}`}
-                    className="block text-blue-700 hover:bg-blue-600 hover:text-white text-lg px-4 py-2 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-md"
+                    className="block text-teal-700 hover:bg-teal-600 hover:text-white text-lg px-4 py-2 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-md"
                   >
                     {item}
                   </a>
                 </li>
               )
             )}
+            {/* Add ArwaaLabs link here */}
+            <li className="my-1 lg:my-0">
+              <a
+                href="#arwaalabs"
+                className="block text-teal-700 hover:bg-teal-600 hover:text-white text-lg px-4 py-2 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-md"
+              >
+                ArwaaLabs
+              </a>
+            </li>
           </ul>
         </nav>
       </div>
