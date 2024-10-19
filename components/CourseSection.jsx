@@ -13,7 +13,6 @@ const CoursesSection = () => {
   const [error, setError] = useState('');
   const [showResultCard, setShowResultCard] = useState(false);
 
-  // Static course data
   const courses = [
     { 
       title: 'Cryptography & Network Security', 
@@ -40,21 +39,33 @@ const CoursesSection = () => {
       ongoing: false
     },
   ];
-
   const handleSearch = async (e) => {
     e.preventDefault();
     setError('');
+  
     try {
-      const response = await fetch('/data.json');
-      if (!response.ok) throw new Error('Failed to fetch data');
+      const response = await fetch('/api/fetch-result', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          rollNumber: search,  // Replace `search` with the actual roll number variable
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to fetch data');
+      }
+  
       const data = await response.json();
-      const results = data.filter(item => item.enrollmentNo === search && item.courseTitle === currentCourse);
-      setFilteredResults(results);
+      setFilteredResults([data]);
     } catch (error) {
       setError('Failed to load search results');
       console.error(error);
     }
   };
+  
 
   return (
     <section id="courses" className="py-4 bg-teal-50">

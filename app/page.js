@@ -2,6 +2,7 @@
 import Head from "next/head";
 import ProfessorLandingPage from "../components/ProfessorLandingPage";
 import ArwaaLabs from "../components/ArwaaLabs";
+import Upload from "../components/Upload";
 
 export default function Home() {
   return (
