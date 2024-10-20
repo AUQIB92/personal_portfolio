@@ -1,12 +1,15 @@
-import dbConnect from '../../../lib/dbConnect';  // Adjust the import path based on your project structure
-import Student from '../../../models/Student';  // Assuming you have a Student model
+import dbConnect from '../../../lib/dbConnect';
+import Students from '../../../models/Student';
 
 export async function POST(req) {
   try {
-    await dbConnect();  // Establish connection
+    await dbConnect();  // Establish MongoDB connection
 
-    const body = await req.json(); // Parse the incoming request body
+    const body = await req.json();  // Parse the request body
     const { rollNumber } = body;
+
+    console.log('RollNumber:', rollNumber);
+    console.log('Type of rollNumber:', typeof rollNumber);  // Check the type of rollNumber
 
     if (!rollNumber) {
       return new Response(JSON.stringify({ message: 'Roll number is required' }), {
@@ -15,8 +18,11 @@ export async function POST(req) {
       });
     }
 
-    // Assuming you have a Student model that matches your MongoDB schema
-    const result = await Student.findOne({ RollNumber: rollNumber });
+
+    // Ensure rollNumber is treated as a string and match the field exactly as in the database
+    const result = await Students.findOne({ RollNumber: String(rollNumber) });
+
+    console.log('Query Result:', result);
 
     if (!result) {
       return new Response(JSON.stringify({ message: 'Student not found' }), {
@@ -25,6 +31,7 @@ export async function POST(req) {
       });
     }
 
+    // Return the student result if found
     return new Response(JSON.stringify(result), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
