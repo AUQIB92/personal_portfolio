@@ -90,6 +90,11 @@ const ResultCard = ({
 
         <ScrollArea className="h-[60vh] overflow-y-auto">
           <CardContent className="p-4 sm:p-6 space-y-4">
+          {theoryMarks >= 20 && practicalMarks >= 20 && (
+                  <div className="mt-4">
+                    <CongratulationsMessage stars={stars} /> 
+                  </div>
+                )}
             <InfoItem icon={Hash} label="Roll Number" value={rollNumber} />
             <InfoItem icon={User} label="Name" value={name} />
             <InfoItem icon={Code} label="Branch" value={branch} />
@@ -119,18 +124,11 @@ const ResultCard = ({
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
                 >
-                  <div className="flex items-center space-x-2">
-                    <Award className="w-6 h-6 text-teal-600" />
-                    <span className="font-semibold text-teal-800">Total Score:</span>
-                  </div>
-                  <span className="text-2xl font-bold text-teal-800">{totalMarks}</span>
+                 
+                  
                 </motion.div>
 
-                {theoryMarks >= 20 && practicalMarks >= 20 && (
-                  <div className="mt-4">
-                    <CongratulationsMessage stars={stars} /> 
-                  </div>
-                )}
+               
               </>
             )}
           </CardContent>
