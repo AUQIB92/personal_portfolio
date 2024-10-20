@@ -8,15 +8,15 @@ export default function AboutMe() {
   // Updated newsItems with the result announcement
   const newsItems = [
     {
-      text: "Internal Exam resultsfor Computer programming is available now  - check your scores online",
+      text: "Internal Exam results for Computer programming is available now  - check your scores online",
       isNew: true, // Flag for new label
       link: "#courses", // Link to courses section
     },
     { text: "New research paper published in Nature", isNew: false },
-    { text: "Upcoming guest lecture series announced", isNew: false },
-    { text: "Grant awarded for innovative AI project", isNew: false },
-    { text: "Student team wins international competition", isNew: false },
-    { text: "New course on Quantum Computing launching next semester", isNew: false }
+    { text: "Upcoming guest lecture series announced", isNew: true },
+    // { text: "Grant awarded for innovative AI project", isNew: false },
+    // { text: "Student team wins international competition", isNew: false },
+    // { text: "New course on Quantum Computing launching next semester", isNew: false }
   ];
 
   const colors = [
