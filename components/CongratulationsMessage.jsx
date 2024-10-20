@@ -39,7 +39,7 @@ export default function CongratulationsMessage({ stars }) {
               <Trophy className="w-16 h-16 text-yellow-300" />
             </motion.div>
             <h2 className="text-3xl font-bold text-white mb-2">Congratulations!</h2>
-            <p className="text-xl text-teal-100 mb-6">You worked hard for your major exam!</p>
+            <p className="text-xl text-teal-900 mb-6">Work hard for your major exam!</p>
             
             {/* Render stars based on the passed stars prop */}
             <div className="flex justify-center space-x-2 mb-4">

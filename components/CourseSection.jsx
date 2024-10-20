@@ -99,7 +99,6 @@ const ResultCard = ({
               </div>
               
               {/* Render stars based on the percentage score */}
-             
               
               {/* Render CongratulationsMessage here if the student has passed */}
               {theoryMarks >= 20 && practicalMarks >= 20 && (
@@ -127,18 +126,20 @@ const CoursesSection = () => {
   const [currentCourse, setCurrentCourse] = useState(null);
   const [error, setError] = useState('');
   const [showResultCard, setShowResultCard] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Spinner state
 
   const handleSearch = async (e) => {
     e.preventDefault();
     setError('');
     setFilteredResults(null);
-
-    if (currentCourse !== 'Computer Programming') {
-      setError('Search is only available for Computer Programming.');
-      return;
-    }
-
+    setIsLoading(true); // Show spinner
     try {
+      if (currentCourse !== 'Computer Programming') {
+        setError('Search is only available for Computer Programming.');
+        setIsLoading(false);
+        return;
+      }
+
       const response = await fetch('/api/fetch-result', {
         method: 'POST',
         headers: {
@@ -156,9 +157,11 @@ const CoursesSection = () => {
       const data = await response.json();
       setFilteredResults(data);
       setShowResultCard(true);
+      setIsLoading(false); // Hide spinner
     } catch (error) {
       setError('Failed to load search results');
-      window.alert("Not avaible")
+      window.alert("Not available");
+      setIsLoading(false); // Hide spinner
       console.error(error);
     }
   };
@@ -206,6 +209,7 @@ const CoursesSection = () => {
           ))}
         </div>
       </div>
+
       {showResultCard && currentCourse && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-40">
           <Card className="w-full max-w-md shadow-lg">
@@ -237,8 +241,19 @@ const CoursesSection = () => {
                     />
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-teal-500 h-5 w-5" />
                   </div>
-                  <Button type="submit" className="w-full bg-teal-600 hover:bg-teal-700 text-white transition-colors duration-300">
-                    Search
+                  <Button
+                    type="submit"
+                    className="w-full bg-teal-600 hover:bg-teal-700 text-white transition-colors duration-300"
+                    disabled={isLoading} // Disable button when loading
+                  >
+                    {isLoading ? (
+                      <span className="flex items-center justify-center">
+                        <span className="mr-2">Loading...</span>
+                        <div className="loader ease-linear rounded-full border-4 border-t-4 border-white h-5 w-5"></div>
+                      </span>
+                    ) : (
+                      'Search'
+                    )}
                   </Button>
                 </form>
               ) : (

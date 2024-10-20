@@ -3,7 +3,7 @@
 # dependencies
 /node_modules
 /.xlsx
-/
+/.env
 /.pnp
 .pnp.js
 .yarn/install-state.gz
