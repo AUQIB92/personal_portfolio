@@ -4,13 +4,21 @@ export default function AboutMe() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const containerRef = useRef(null);
+
+  // Updated newsItems with the result announcement
   const newsItems = [
-    "New research paper published in Nature",
-    "Upcoming guest lecture series announced",
-    "Grant awarded for innovative AI project",
-    "Student team wins international competition",
-    "New course on Quantum Computing launching next semester"
+    {
+      text: "Internal Exam results for Computer programming is available now  - check your scores online",
+      isNew: true, // Flag for new label
+      link: "#courses", // Link to courses section
+    },
+    { text: "New research paper published in Nature", isNew: false },
+    { text: "Upcoming guest lecture series announced", isNew: true },
+    // { text: "Grant awarded for innovative AI project", isNew: false },
+    // { text: "Student team wins international competition", isNew: false },
+    // { text: "New course on Quantum Computing launching next semester", isNew: false }
   ];
+
   const colors = [
     'bg-teal-100 border-teal-500',
     'bg-emerald-100 border-emerald-500',
@@ -33,7 +41,7 @@ export default function AboutMe() {
             setTimeout(() => {
               setIsPaused(false);
               return 0;
-            }, 3000); // 3 seconds pause
+            }, 4000); // 3 seconds pause
             return 0;
           }
           return prevPosition - 1;
@@ -90,12 +98,21 @@ export default function AboutMe() {
                 style={{ transform: `translateY(${scrollPosition}px)` }}
               >
                 {newsItems.concat(newsItems).map((item, index) => (
-                  <div
+                  <a
                     key={index}
-                    className={`${colors[index % colors.length]} bg-opacity-70 backdrop-filter backdrop-blur-lg rounded-lg p-4 mb-4 transition-all duration-300 ease-in-out transform hover:scale-102 hover:shadow-md border-l-4`}
+                    href={item.link || '#'}
+                    className={`${colors[index % colors.length]} bg-opacity-70 backdrop-filter backdrop-blur-lg rounded-lg p-4 mb-4 transition-all duration-300 ease-in-out transform hover:scale-102 hover:shadow-md border-l-4 flex justify-between items-center`}
                   >
-                    <p className="text-gray-800 font-medium">{item}</p>
-                  </div>
+                    <p className={`text-gray-800 font-medium ${item.isNew ? 'text-teal-900 font-bold' : ''}`}>
+                      {item.text}
+                    </p>
+                    {/* New Label for results */}
+                    {item.isNew && (
+                      <span className="ml-4 px-2 py-1 bg-red-500 text-white text-xs rounded-lg">
+                        New
+                      </span>
+                    )}
+                  </a>
                 ))}
               </div>
             </div>
