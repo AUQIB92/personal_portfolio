@@ -64,7 +64,7 @@ export default function Header() {
             {/* Add ArwaaLabs link here */}
             <li className="my-1 lg:my-0">
               <a
-                href="#arwaalabs"
+                href="./ArwaaLabs.jsx"
                 className="block text-teal-700 hover:bg-teal-600 hover:text-white text-lg px-4 py-2 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-md"
               >
                 ArwaaLabs

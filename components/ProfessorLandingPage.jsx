@@ -9,9 +9,9 @@ import Header from "./Header";
 import AboutMe from "./AboutMe";
 import ExperienceSection from "./ExperienceSection";
 import Publications from "./Publications";
-import { Input } from "../components/ui/input";
-import { Textarea } from "../components/ui/textarea";
-import { Button } from "../components/ui/button";
+import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
+import { Button } from "./ui/button";
 
 const ProfessorLandingPage = () => {
   const [name, setName] = useState("");
@@ -56,7 +56,6 @@ const ProfessorLandingPage = () => {
 
   return (
     <div className="font-sans bg-teal-50">
-      <Header />
       <AboutMe />
       <ExperienceSection />
       <CoursesSection />
