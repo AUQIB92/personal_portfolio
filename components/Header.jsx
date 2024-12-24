@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,23 +13,23 @@ export default function Header() {
     <header className="bg-gradient-to-r from-teal-50 to-emerald-50 py-6 shadow-lg">
       <div className="container mx-auto px-4 flex flex-wrap items-center justify-between">
         {/* Logo and Title */}
-        <div className="flex items-center">
-          <img
-            src="./Logo.jpeg"
-            alt="Professor's Logo"
-            className="w-20 h-20 rounded-full mr-4 border-2 border-teal-500 shadow-md"
-          />
-          <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-teal-700 tracking-wide">
-              Auqib Hamid Lone{" "}
-              <span className="text-lg font-normal">(Ph.D.)</span>
-            </h1>
-            <p className="text-sm md:text-base text-gray-600 mt-2 italic tracking-wide">
-              <span className="font-bold">I Code with Purpose</span>,{" "}
-              <span className="font-bold">Read for Growth</span>,{" "}
-              <span className="font-bold">Teach for Impact</span>
-            </p>
-          </div>
+        <Image
+          src="/Logo.jpeg"
+          alt="Professor's Logo"
+          width={80}
+          height={80}
+          className="rounded-full mr-4 border-2 border-teal-500 shadow-md"
+        />
+        <div>
+          <h1 className="text-2xl md:text-3xl font-bold text-teal-700 tracking-wide">
+            Auqib Hamid Lone{" "}
+            <span className="text-lg font-normal">(Ph.D.)</span>
+          </h1>
+          <p className="text-sm md:text-base text-gray-600 mt-2 italic tracking-wide">
+            <span className="font-bold">I Code with Purpose</span>,{" "}
+            <span className="font-bold">Read for Growth</span>,{" "}
+            <span className="font-bold">Teach for Impact</span>
+          </p>
         </div>
 
         {/* Hamburger Icon */}

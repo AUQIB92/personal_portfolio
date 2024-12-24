@@ -12,7 +12,7 @@ import { Input } from "../components/ui/input";
 import { Button } from "../components/ui/button";
 import { Label } from "../components/ui/label";
 import { ScrollArea } from "../components/ui/scroll-area";
-import { Alert, AlertTitle, AlertDescription } from "./ui/alert";
+import { Alert, AlertTitle, AlertDescription } from "../components/ui/alert";
 import {
   X,
   Search,
@@ -30,33 +30,36 @@ import {
   FileDown,
 } from "lucide-react";
 import CongratulationsMessage from "./CongratulationsMessage";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import ResultCard from "./ResultCard";
+
 const courses = [
   {
     title: "Cryptography & Network Security",
     description: "Learn the fundamentals of Cryptography and Network Security.",
-    image: "./Crypto_Net-Sec.jpeg",
+    image: "/Crypto_Net-Sec.jpeg",
     ongoing: false,
   },
   {
     title: "Computer Programming",
     description:
       "Learn the fundamentals of Computer Programming. Explore and implement different programming concepts using C Programming Language.",
-    image: "./Computer_Prog.jpg",
+    image: "/Computer_Prog.jpg",
     ongoing: true,
   },
   {
     title: "Java Programming",
     description:
       "Explore the world of JAVA. Learn the classic elements of Object-Oriented Programming.",
-    image: "./Java.jpeg",
+    image: "/Java.jpeg",
     ongoing: true,
   },
   {
     title: "Introduction to Blockchain",
     description:
       "Learn about the fascinating world of Blockchain Technology that is shaping the future of payments and beyond.",
-    image: "./Block.png",
+    image: "/Block.png",
     ongoing: false,
   },
   {
@@ -66,6 +69,7 @@ const courses = [
     ongoing: true,
   },
 ];
+
 const seminarTopics = [
   {
     title: "Git and GitHub",
@@ -73,7 +77,7 @@ const seminarTopics = [
       "Version control and collaborative development using Git and GitHub.",
     details:
       "Learn how to effectively use Git for version control and collaborate on projects using GitHub. Topics include branching, merging, pull requests, and best practices for team development.",
-    date: "06-11-2024",
+    date: "2024-06-11",
     venue: "Lecture Hall A",
     slides: "/slides/git&github.pdf",
   },
@@ -306,9 +310,11 @@ const CoursesSection = () => {
               >
                 {course.ongoing ? "Ongoing" : "Completed"}
               </div>
-              <img
+              <Image
                 src={course.image}
                 alt={course.title}
+                width={500}
+                height={200}
                 className="w-full h-48 object-cover"
               />
               <CardContent className="p-6">
