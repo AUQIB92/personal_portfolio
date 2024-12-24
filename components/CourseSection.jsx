@@ -17,17 +17,14 @@ import {
   X,
   Search,
   AlertCircle,
-  Hash,
-  User,
-  Code,
-  Award,
-  BookOpen,
-  Star,
-  ChevronDown,
-  ChevronUp,
   Calendar,
   MapPin,
   FileDown,
+  ChevronDown,
+  ChevronUp,
+  ExternalLink,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import CongratulationsMessage from "./CongratulationsMessage";
 import Image from "next/image";
@@ -46,14 +43,14 @@ const courses = [
     description:
       "Learn the fundamentals of Computer Programming. Explore and implement different programming concepts using C Programming Language.",
     image: "/Computer_Prog.jpg",
-    ongoing: true,
+    ongoing: false,
   },
   {
     title: "Java Programming",
     description:
       "Explore the world of JAVA. Learn the classic elements of Object-Oriented Programming.",
     image: "/Java.jpeg",
-    ongoing: true,
+    ongoing: false,
   },
   {
     title: "Introduction to Blockchain",
@@ -65,7 +62,7 @@ const courses = [
   {
     title: "Seminars/Guest Lectures",
     description: "Explore various topics through seminars and guest lectures.",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/seminar.jpg",
     ongoing: true,
   },
 ];
@@ -80,6 +77,7 @@ const seminarTopics = [
     date: "2024-06-11",
     venue: "Lecture Hall A",
     slides: "/slides/git&github.pdf",
+    image: "/git-workshop.jpg",
   },
   {
     title: "Blockchain Technology",
@@ -89,6 +87,7 @@ const seminarTopics = [
     date: "2023-06-22",
     venue: "Virtual Auditorium",
     slides: "/slides/blockchain-seminar.pdf",
+    image: "/blockchain-seminar.jpg",
   },
   {
     title: "Artificial Intelligence and Machine Learning",
@@ -98,6 +97,7 @@ const seminarTopics = [
     date: "2023-07-10",
     venue: "Conference Room 2B",
     slides: "/slides/ai-ml-seminar.pdf",
+    image: "/ai-ml-workshop.jpg",
   },
   {
     title: "Cybersecurity in the Digital Age",
@@ -107,6 +107,7 @@ const seminarTopics = [
     date: "2023-08-05",
     venue: "Lecture Hall C",
     slides: "/slides/cybersecurity-seminar.pdf",
+    image: "/cybersecurity-lecture.jpg",
   },
 ];
 
@@ -117,15 +118,16 @@ const SeminarTopicCard = ({
   date,
   venue,
   slides,
+  image,
   isOpen,
   onClick,
 }) => (
-  <Card className="mb-4 overflow-hidden">
+  <Card className="mb-6 overflow-hidden shadow-lg">
     <CardHeader
-      className="cursor-pointer bg-teal-100 hover:bg-teal-200 transition-colors duration-200"
+      className="cursor-pointer bg-gradient-to-r from-teal-500 to-teal-600 text-white"
       onClick={onClick}
     >
-      <CardTitle className="text-lg font-semibold text-teal-800 flex justify-between items-center">
+      <CardTitle className="text-lg font-semibold flex justify-between items-center">
         {title}
         {isOpen ? (
           <ChevronUp className="w-5 h-5" />
@@ -144,20 +146,29 @@ const SeminarTopicCard = ({
           className="overflow-hidden"
         >
           <CardContent className="pt-4">
+            <div className="mb-4 relative h-48 rounded-lg overflow-hidden">
+              <Image
+                src={image}
+                alt={title}
+                layout="fill"
+                objectFit="cover"
+                className="transition-transform duration-300 transform hover:scale-110"
+              />
+            </div>
             <p className="text-gray-600 mb-2">{description}</p>
             <p className="text-gray-700 mb-4">{details}</p>
             <div className="flex flex-col space-y-2 text-sm text-gray-600">
               <div className="flex items-center">
-                <Calendar className="w-4 h-4 mr-2" />
+                <Calendar className="w-4 h-4 mr-2 text-teal-600" />
                 <span>Date: {new Date(date).toLocaleDateString()}</span>
               </div>
               <div className="flex items-center">
-                <MapPin className="w-4 h-4 mr-2" />
+                <MapPin className="w-4 h-4 mr-2 text-teal-600" />
                 <span>Venue: {venue}</span>
               </div>
             </div>
             <Button
-              className="mt-4 bg-teal-600 hover:bg-teal-700 text-white"
+              className="mt-4 bg-teal-600 hover:bg-teal-700 text-white transition-colors duration-300"
               onClick={(e) => {
                 e.stopPropagation();
                 window.open(slides, "_blank");
@@ -187,9 +198,9 @@ const SeminarCard = ({ onClose }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <Card className="w-full max-w-2xl mx-auto bg-white shadow-xl rounded-xl overflow-hidden">
+      <Card className="w-full max-w-3xl mx-auto bg-white shadow-xl rounded-xl overflow-hidden">
         <CardHeader className="bg-gradient-to-r from-teal-500 to-teal-600 text-white p-4">
-          <CardTitle className="text-xl font-bold flex items-center justify-between">
+          <CardTitle className="text-2xl font-bold flex items-center justify-between">
             <span>Seminars/Guest Lectures</span>
             <Button
               variant="ghost"
@@ -201,8 +212,8 @@ const SeminarCard = ({ onClose }) => {
           </CardTitle>
         </CardHeader>
         <CardContent className="p-4">
-          <ScrollArea className="h-[60vh] pr-4">
-            <p className="text-gray-700 mb-4">
+          <ScrollArea className="h-[70vh] pr-4">
+            <p className="text-gray-700 mb-6 text-lg">
               Explore a variety of topics through our engaging seminars and
               guest lectures. These sessions provide valuable insights from
               industry experts and academics, covering cutting-edge
@@ -288,59 +299,79 @@ const CoursesSection = () => {
   };
 
   return (
-    <section id="courses" className="py-12 bg-teal-50">
+    <section
+      id="courses"
+      className="py-16 bg-gradient-to-b from-teal-50 to-white"
+    >
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold mb-4 text-teal-800">Courses</h2>
-        <h4 className="text-xl font-semibold mb-8 text-teal-700">
-          Courses that I am currently teaching or taught in the past
+        <h2 className="text-5xl font-bold mb-4 text-teal-800 text-center">
+          Courses & Workshops
+        </h2>
+        <h4 className="text-xl font-semibold mb-12 text-teal-700 text-center max-w-3xl mx-auto">
+          Explore our diverse range of courses and engaging workshops designed
+          to enhance your skills and knowledge in various areas of computer
+          science and engineering.
         </h4>
-        {error && <p className="text-red-500 mb-4">{error}</p>}
+        {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {courses.map((course, index) => (
-            <Card
+            <motion.div
               key={index}
-              className="overflow-hidden transition duration-300 transform hover:scale-105 hover:shadow-lg"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <div
-                className={`absolute top-4 right-4 px-2 py-1 rounded-full text-xs font-semibold ${
-                  course.ongoing
-                    ? "bg-teal-500 text-white"
-                    : "bg-gray-300 text-gray-700"
-                }`}
-              >
-                {course.ongoing ? "Ongoing" : "Completed"}
-              </div>
-              <Image
-                src={course.image}
-                alt={course.title}
-                width={500}
-                height={200}
-                className="w-full h-48 object-cover"
-              />
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-2 text-teal-700">
-                  {course.title}
-                </h3>
-                <p className="text-gray-600 mb-4">{course.description}</p>
-                {course.ongoing && (
-                  <Button
-                    className="bg-teal-600 hover:bg-teal-700 text-white"
-                    onClick={() => {
-                      if (course.title === "Seminars/Guest Lectures") {
-                        setShowSeminarCard(true);
-                      } else {
-                        setCurrentCourse(course.title);
-                        setShowResultCard(true);
-                      }
-                    }}
+              <Card className="overflow-hidden transition duration-300 transform hover:scale-105 hover:shadow-2xl h-full flex flex-col">
+                <div className="relative h-48">
+                  <Image
+                    src={course.image}
+                    alt={course.title}
+                    layout="fill"
+                    objectFit="cover"
+                    className="transition-transform duration-300 transform hover:scale-110"
+                  />
+                  <div
+                    className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold ${
+                      course.ongoing
+                        ? "bg-green-500 text-white"
+                        : "bg-gray-300 text-gray-700"
+                    }`}
                   >
-                    {course.title === "Seminars/Guest Lectures"
-                      ? "View Details"
-                      : "View Results"}
-                  </Button>
-                )}
-              </CardContent>
-            </Card>
+                    {course.ongoing ? "Ongoing" : "Completed"}
+                  </div>
+                </div>
+                <CardContent className="p-6 flex-grow flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-2xl font-semibold mb-3 text-teal-700">
+                      {course.title}
+                    </h3>
+                    <p className="text-gray-600 mb-4">{course.description}</p>
+                  </div>
+                  {course.ongoing && (
+                    <Button
+                      className="bg-teal-600 hover:bg-teal-700 text-white transition-colors duration-300 mt-4"
+                      onClick={() => {
+                        if (course.title === "Seminars/Guest Lectures") {
+                          setShowSeminarCard(true);
+                        } else {
+                          setCurrentCourse(course.title);
+                          setShowResultCard(true);
+                        }
+                      }}
+                    >
+                      {course.title === "Seminars/Guest Lectures" ? (
+                        <>
+                          View Details
+                          <ExternalLink className="w-4 h-4 ml-2" />
+                        </>
+                      ) : (
+                        "View Results"
+                      )}
+                    </Button>
+                  )}
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -371,7 +402,7 @@ const CoursesSection = () => {
                         htmlFor="enroll-no"
                         className="text-teal-700 font-medium"
                       >
-                        Enrollment Number :
+                        Enrollment Number:
                       </Label>
                     </div>
                     <div className="relative">
@@ -394,7 +425,7 @@ const CoursesSection = () => {
                       {isLoading ? (
                         <span className="flex items-center justify-center">
                           <span className="mr-2">Loading...</span>
-                          <div className="loader ease-linear rounded-full border-4 border-t-4 border-white h-5 w-5"></div>
+                          <div className="loader ease-linear rounded-full border-4 border-t-4 border-white h-5 w-5 animate-spin"></div>
                         </span>
                       ) : (
                         "Search"
@@ -420,7 +451,6 @@ const CoursesSection = () => {
                       practicalMarks={filteredResults.PracticalMarks}
                       courseTitle={currentCourse}
                       onClose={handleClose}
-                      lowMarks={false}
                     />
                   </div>
                 )}
